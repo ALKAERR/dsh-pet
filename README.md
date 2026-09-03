@@ -165,3 +165,8 @@ curl http://127.0.0.1:3080/dsh-pet/sprite/正面_306.png # → 200 image/png（�
 ## 许可证
 
 MIT License（见 `package.json` 的 `license` 字段）。
+
+## 素材来源
+
+立绘素材来自 [dafeiyu-pet](https://github.com/1190fasheqi/dafeiyu-pet)，在此致谢原作者。
+
