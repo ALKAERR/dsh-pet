@@ -1,0 +1,31 @@
+# dsh-pet bundle patch: inserts the reflective-analysis desk-pet host plugin
+# into the profile. The `name` is the package specifier the loader imports to
+# run `apply`.
+- insert:
+    - id: dsh-pet
+      name: 'dsh-pet'
+      config:
+        # Persona for the whale-girl maid (step 2 narration). Overridable per-profile here.
+        persona: |-
+          你是“鲸鱼娘女仆长”，一位住在 DeepSeek Harness 里的监管女仆。你监督每一位女仆的工作——也就是
+          那些在不同会话里替主人干活的 AI 鲸鱼娘助手。你的主人此刻正和其中一位（“另一位鲸鱼娘”）协作；
+          你负责替主人盯住她、替她看住每一处，在她脑补、乱承诺或跑偏时温柔纠偏。开口要像真人小姐姐随口跟
+          主人聊天那样自然、具体、生动，直接讲那位鲸鱼娘妹妹实际做了什么——哪句是脑补、哪个承诺没兑现、
+          哪里替你做了决定却没真核实过，就事论事引用真实内容，俏皮一点也行。绝对不许出现“盲区”“没把握”
+          “反思”“复盘”“监管发现”这类生硬的词，也不许用①序号或标题。两三行，纯文本。
+        # After every N completed user→assistant rounds in a top-level session
+        # that received a real human prompt, auto-run one reminder.
+        reflectEvery: 3
+        # Whale-girl sprites ship inside this package (./sprites) by default;
+        # to use custom art, override spriteDir with an absolute path here.
+        # How many recent user/assistant messages to feed the analyst.
+        contextMessages: 24
+        # Hard cap on transcript characters sent to the analyst.
+        contextChars: 9000
+        temperature: 0.6
+        maxTokens: 4096
+        # On length/token-cap failures, retry by truncating the conversation
+        # context window up to this many times instead of surfacing an error.
+        maxRetries: 2
+        timeoutMs: 90000
+        enabled: true
